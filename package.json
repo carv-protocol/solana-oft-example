@@ -1,0 +1,15 @@
+{
+  "name": "carv-solana-oft",
+  "version": "0.0.1",
+  "repository": "git@github:carv-protocol/carv-solana-oft.git",
+  "license": "MIT",
+  "dependencies": {
+    "@layerzerolabs/lz-solana-sdk-v2": "^2.3.29",
+    "@layerzerolabs/lz-v2-utilities": "^2.3.29",
+    "@solana-developers/helpers": "^2.3.0",
+    "@solana/spl-token": "^0.4.8",
+    "@solana/spl-token-metadata": "^0.1.4",
+    "@solana/web3.js": "^1.95.0",
+    "esrun": "^3.2.26"
+  }
+}

@@ -1,0 +1,6 @@
+[package]
+name = "carv-solana-oft"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
