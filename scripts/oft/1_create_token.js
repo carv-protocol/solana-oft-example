@@ -6,7 +6,7 @@ const {
 } = require('@solana/web3.js');
 
 const {
-    TOKEN_2022_PROGRAM_ID,
+    TOKEN_PROGRAM_ID,
     createInitializeMintInstruction,
     getMintLen,
 } = require('@solana/spl-token');
@@ -29,14 +29,14 @@ async function main() {
             newAccountPubkey: mintKp.publicKey,
             space: getMintLen([]),
             lamports: minimumBalanceForMint,
-            programId: TOKEN_2022_PROGRAM_ID,
+            programId: TOKEN_PROGRAM_ID,
         }),
         await createInitializeMintInstruction(
             mintKp.publicKey,
             OFT_DECIMALS,
             account.publicKey,
             null,
-            TOKEN_2022_PROGRAM_ID,
+            TOKEN_PROGRAM_ID,
         ),
     );
     let sig = await sendAndConfirmTransaction(TestNetConn, transaction, [account, mintKp]);
