@@ -8,7 +8,7 @@ const {
 const {
     createMintToInstruction,
     getOrCreateAssociatedTokenAccount,
-    TOKEN_2022_PROGRAM_ID
+    TOKEN_PROGRAM_ID
 } = require('@solana/spl-token');
 
 const {
@@ -29,9 +29,8 @@ async function main() {
         false,
         'processed',
         {},
-         TOKEN_2022_PROGRAM_ID,
+         TOKEN_PROGRAM_ID,
     )
-    console.log(ataAccount.address.toBase58())
 
     let transaction = new Transaction().add(
         createMintToInstruction(
@@ -40,7 +39,7 @@ async function main() {
             account.publicKey,
             100000000,
             [],
-            TOKEN_2022_PROGRAM_ID
+            TOKEN_PROGRAM_ID
         )
     );
     const signature = await sendAndConfirmTransaction(TestNetConn, transaction, [account]);

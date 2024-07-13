@@ -1,11 +1,11 @@
 const {
     Keypair,
-    PublicKey,
     Transaction,
-    sendAndConfirmTransaction, Connection, AccountMeta, TransactionInstruction,
+    ComputeBudgetProgram,
+    sendAndConfirmTransaction
 } = require('@solana/web3.js');
 
-const {getOrCreateAssociatedTokenAccount, TOKEN_2022_PROGRAM_ID} = require("@solana/spl-token");
+const {getOrCreateAssociatedTokenAccount, TOKEN_PROGRAM_ID} = require("@solana/spl-token");
 const {OftTools} = require('@layerzerolabs/lz-solana-sdk-v2');
 const {addressToBytes32, Options } = require('@layerzerolabs/lz-v2-utilities');
 
@@ -14,6 +14,7 @@ const {SecretKey, TestNetConn, TokenPubKey} = require("../common")
 async function main() {
     let account = Keypair.fromSecretKey(SecretKey);
     console.log(`🔑Owner public key is: ${account.publicKey.toBase58()}`,);
+    console.log(`🔑Token public key is: ${TokenPubKey.toBase58()}`,);
 
     const peer = {
         dstEid: 40231,
@@ -28,7 +29,7 @@ async function main() {
         false,
         'confirmed',
         {},
-        TOKEN_2022_PROGRAM_ID,
+        TOKEN_PROGRAM_ID,
     )
 
     const receiver = addressToBytes32('0xAdB2b5B7bA93ABEE50cB4A7a063d826233137B65');
@@ -41,7 +42,7 @@ async function main() {
         peer.dstEid,
         amountToSend,
         amountToSend,
-        Options.newOptions().addExecutorLzReceiveOption(0, 0).toBytes(),
+        Options.newOptions().addExecutorLzReceiveOption(500000, 0).toBytes(),
         Array.from(receiver),
     );
 
@@ -50,15 +51,15 @@ async function main() {
             TestNetConn,
             account.publicKey,
             TokenPubKey,
-            ataAccount.publicKey,
+            ataAccount.address,
             peer.dstEid,
             amountToSend,
             amountToSend,
-            Options.newOptions().addExecutorLzReceiveOption(0, 0).toBytes(),
+            Options.newOptions().addExecutorLzReceiveOption(500000, 0).toBytes(),
             Array.from(receiver),
             fee.nativeFee
         ),
-    );
+    ).add(ComputeBudgetProgram.setComputeUnitLimit({ units: 400_000 }));
 
     const sig = await sendAndConfirmTransaction(TestNetConn, sendTransaction, [account]);
     console.log(

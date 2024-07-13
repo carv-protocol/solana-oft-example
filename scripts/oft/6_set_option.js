@@ -12,7 +12,8 @@ const {SecretKey, TestNetConn, TokenPubKey} = require("../common")
 
 async function main() {
     let account = Keypair.fromSecretKey(SecretKey);
-    console.log(`🔑Owner public key is: ${account.publicKey.toBase58()}`,);
+    console.log(`🔑Owner public key is: ${account.publicKey.toBase58()}`);
+    console.log(`🔑Token public key is: ${TokenPubKey.toBase58()}`);
 
     const peers = [
         {dstEid: 40231, peerAddress: addressToBytes32('0x8935Fa8Fa557D427317Dc05392ff6d7a5aC91D94')},

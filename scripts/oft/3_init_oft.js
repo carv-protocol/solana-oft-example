@@ -7,7 +7,7 @@ const {
 
 const {
     AuthorityType,
-    TOKEN_2022_PROGRAM_ID,
+    TOKEN_PROGRAM_ID,
     createSetAuthorityInstruction,
 } = require('@solana/spl-token');
 
@@ -24,6 +24,8 @@ async function main() {
     );
     console.log(`🔑oftConfig public key is: ${oftConfig.toBase58()}`,);
 
+    // Create a new transaction to transfer your SPL Tokens Mint Authority
+    // and Initialize the OFT config
     let transaction = new Transaction().add(
         createSetAuthorityInstruction(
             TokenPubKey,
@@ -31,7 +33,7 @@ async function main() {
             AuthorityType.MintTokens,
             oftConfig,
             [],
-            TOKEN_2022_PROGRAM_ID,
+            TOKEN_PROGRAM_ID,
         ),
 
         await OftTools.createInitNativeOftIx(
@@ -40,7 +42,7 @@ async function main() {
             TokenPubKey,
             account.publicKey,
             6,
-            TOKEN_2022_PROGRAM_ID,
+            TOKEN_PROGRAM_ID,
             OftProgram.OFT_DEFAULT_PROGRAM_ID,
         ),
     );
