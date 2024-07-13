@@ -42,7 +42,8 @@ async function main() {
         peer.dstEid,
         amountToSend,
         amountToSend,
-        Options.newOptions().addExecutorLzReceiveOption(500000, 0).toBytes(),
+        // Set to zero cuz it will be added to the previous createSetEnforcedOptionsIx value
+        Options.newOptions().addExecutorLzReceiveOption(0, 0).toBytes(),
         Array.from(receiver),
     );
 
@@ -55,7 +56,8 @@ async function main() {
             peer.dstEid,
             amountToSend,
             amountToSend,
-            Options.newOptions().addExecutorLzReceiveOption(500000, 0).toBytes(),
+            // ditto
+            Options.newOptions().addExecutorLzReceiveOption(0, 0).toBytes(),
             Array.from(receiver),
             fee.nativeFee
         ),
