@@ -6,7 +6,7 @@ exports.SecretKey2 = Uint8Array.from([151,211,107,89,233,90,126,10,255,171,94,10
 // exports.TokenPubKey = new PublicKey("D5V2mtWiujVkaMB3WjhBA6SAnfbZpKtfNoFXtBatDww4")
 
 // testnet token contract
-exports.TokenPubKey = new PublicKey("C2gJxYdwQFLECMqk8AjGBYxpWYa2ySc4bKYVV2pmHpaq")
+exports.TokenPubKey = new PublicKey("8tjXfjTu6k5Gze8EczH4rXCnw1JiJfrjeVy8dhpUGpqd")
 
 exports.DevNetConn = new Connection(clusterApiUrl("devnet"), "confirmed");
 exports.TestNetConn = new Connection(clusterApiUrl("testnet"), "confirmed");

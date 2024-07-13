@@ -18,7 +18,7 @@ async function main() {
 
     const peer = {
         dstEid: 40231,
-        peerAddress: addressToBytes32('0x8935Fa8Fa557D427317Dc05392ff6d7a5aC91D94'),
+        peerAddress: addressToBytes32('0xEe124EFd323ec2e5148583b39a799ec7Cf6CD897'),
     };
 
     let ataAccount = await getOrCreateAssociatedTokenAccount(
