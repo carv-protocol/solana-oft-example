@@ -14,7 +14,6 @@ async function main() {
     let account = Keypair.fromSecretKey(SecretKey);
     console.log(`🔑Owner public key is: ${account.publicKey.toBase58()}`,);
 
-    const executor = new PublicKey('76y77prsiCMvXMjuoZ5VRrhG5qYBrUMYTE5WgHqgjEn6');
     const publicExecutor = new PublicKey('AwrbHeCyniXaQhiJZkLhgWdUCteeWSGaSN1sTfLiY7xK')
     const peers = [
         {dstEid: 40231, peerAddress: addressToBytes32('0xEe124EFd323ec2e5148583b39a799ec7Cf6CD897')},
@@ -25,18 +24,6 @@ async function main() {
         [Buffer.from(OFT_SEED), TokenPubKey.toBuffer()],
         OftProgram.OFT_DEFAULT_PROGRAM_ID,
     );
-    const [findExecutor] = PublicKey.findProgramAddressSync(
-        [Buffer.from(EXECUTOR_CONFIG_SEED, 'utf8')],
-        executor,
-    )
-
-    const executorConfig = UlnProgram.executorConfigBeet.serialize({
-        executor: findExecutor,
-        maxMessageSize: 10000,
-    })[0];
-
-    console.log(`🔑Executor public key is: ${findExecutor.toBase58()}`,);
-    
 
     console.log(executorConfig)
 
