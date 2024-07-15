@@ -33,7 +33,8 @@ async function main() {
     )
 
     const receiver = addressToBytes32('0xAdB2b5B7bA93ABEE50cB4A7a063d826233137B65');
-    const amountToSend = 10n;
+    // 10 CARV
+    const amountToSend = 10_000_000n;
 
     const fee = await OftTools.quoteWithUln(
         TestNetConn,

@@ -37,11 +37,6 @@ async function main() {
                     .addExecutorComposeOption(0, 500000, 0)
                     .toBytes(),
             ),
-            await OftTools.createInitSendLibraryIx(
-                account.publicKey,
-                oftConfig,
-                peer.dstEid,
-            ),
             await OftTools.createInitNonceIx(
                 account.publicKey,
                 peer.dstEid,
