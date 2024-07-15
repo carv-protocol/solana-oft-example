@@ -3,8 +3,7 @@ const {
 } = require('@solana/web3.js');
 
 const {OftTools ,OftProgram, OFT_SEED, DVN_CONFIG_SEED} = require('@layerzerolabs/lz-solana-sdk-v2');
-const {TestNetConn, TokenPubKey} = require('../common')
-const {addressToBytes32, } = require('@layerzerolabs/lz-v2-utilities');
+const {TestNetConn, TokenPubKey, Peers} = require('../common')
 
 async function main() {
     const [oftConfig] = PublicKey.findProgramAddressSync(
@@ -18,12 +17,7 @@ async function main() {
     const lzDVNConfigAccount = PublicKey.findProgramAddressSync([Buffer.from(DVN_CONFIG_SEED, 'utf8')], lzDVNProgramId)[0];
     console.log(`🔑oftConfig public key is: ${lzDVNConfigAccount}`,);
 
-    const peers = [
-        {dstEid: 40231, peerAddress: addressToBytes32('0xEe124EFd323ec2e5148583b39a799ec7Cf6CD897')},
-        // {dstEid: 40202, peerAddress: addressToBytes32('0x531DD61c620bD76aC6fA4f7217bc4654EdB3C353')},
-    ];
-
-    for (const peer of peers) {
+    for (const peer of Peers) {
         const log = await OftTools.getEndpointConfig(
             TestNetConn,
             oftConfig, // your OFT Config PDA

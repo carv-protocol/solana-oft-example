@@ -5,10 +5,9 @@ const {
     sendAndConfirmTransaction,
 } = require('@solana/web3.js');
 
-const { OftTools, EXECUTOR_CONFIG_SEED, OFT_SEED, UlnProgram, OftProgram, SetConfigType } = require('@layerzerolabs/lz-solana-sdk-v2');
-const {addressToBytes32, } = require('@layerzerolabs/lz-v2-utilities');
+const { OftTools, OFT_SEED, OftProgram, SetConfigType } = require('@layerzerolabs/lz-solana-sdk-v2');
 
-const { SecretKey, TestNetConn, TokenPubKey } = require("../common")
+const { SecretKey, TestNetConn, TokenPubKey, Peers } = require("../common")
 
 async function main() {
     let account = Keypair.fromSecretKey(SecretKey);
@@ -20,17 +19,12 @@ async function main() {
     const lzDVNConfigAccount = PublicKey.findProgramAddressSync([Buffer.from(DVN_CONFIG_SEED, 'utf8')], lzDVNProgramId)[0]; 
     console.log(`🔑LayerZero DVN config is: ${lzDVNConfigAccount.toBase58()}`,);
 
-    const peers = [
-        {dstEid: 40231, peerAddress: addressToBytes32('0xEe124EFd323ec2e5148583b39a799ec7Cf6CD897')},
-        // {dstEid: 40202, peerAddress: addressToBytes32('0x531DD61c620bD76aC6fA4f7217bc4654EdB3C353')},
-    ];
-
     const [oftConfig] = PublicKey.findProgramAddressSync(
         [Buffer.from(OFT_SEED), TokenPubKey.toBuffer()],
         OftProgram.OFT_DEFAULT_PROGRAM_ID,
     );
 
-    for (const peer of peers) {
+    for (const peer of Peers) {
         // Set the Executor config for the pathway.
         const setExecutorConfigTransaction = new Transaction().add(
             await OftTools.createSetConfigIx(
