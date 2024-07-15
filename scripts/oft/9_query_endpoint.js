@@ -1,12 +1,9 @@
 const {
-    Keypair,
     PublicKey,
-    Transaction,
-    sendAndConfirmTransaction,
 } = require('@solana/web3.js');
 
 const {OftTools ,OftProgram, OFT_SEED, DVN_CONFIG_SEED} = require('@layerzerolabs/lz-solana-sdk-v2');
-const {TestNetConn, SecretKey, TokenPubKey} = require('../common')
+const {TestNetConn, TokenPubKey} = require('../common')
 const {addressToBytes32, } = require('@layerzerolabs/lz-v2-utilities');
 
 async function main() {
