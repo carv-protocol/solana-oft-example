@@ -19,7 +19,8 @@ async function main() {
         // {dstEid: 40202, peerAddress: addressToBytes32('0x531DD61c620bD76aC6fA4f7217bc4654EdB3C353')},
     ];
 
-    const uln = new PublicKey('76y77prsiCMvXMjuoZ5VRrhG5qYBrUMYTE5WgHqgjEn6');
+    // ulnProgramID from LayerZero
+    const uln = new PublicKey('7a4WjyR8VZ7yZz5XJAKm39BUGn5iT9CKcv2pmG9tdXVH');
 
     const [oftConfig] = PublicKey.findProgramAddressSync(
         [Buffer.from(OFT_SEED), TokenPubKey.toBuffer()],
@@ -73,7 +74,7 @@ async function main() {
         console.log(
             `✅ You initialized the receive library for dstEid ${peer.dstEid}! View the transaction here: ${initReceiveLibrarySignature}`,
         );
-    
+
         // Set the receive library for the pathway.
         const setReceiveLibraryTransaction = new Transaction().add(
             await OftTools.createSetReceiveLibraryIx(account.publicKey, oftConfig, uln, peer.dstEid, 0n),
