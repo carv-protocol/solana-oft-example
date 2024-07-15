@@ -6,18 +6,13 @@ const {
 } = require('@solana/web3.js');
 
 const {OftTools, OFT_SEED, OftProgram} = require('@layerzerolabs/lz-solana-sdk-v2');
-const {addressToBytes32, } = require('@layerzerolabs/lz-v2-utilities');
 
-const {SecretKey, TestNetConn, TokenPubKey} = require("../common")
+const {SecretKey, TestNetConn, TokenPubKey, Peers} = require("../common")
 
 async function main() {
     let account = Keypair.fromSecretKey(SecretKey);
     console.log(`🔑Owner public key is: ${account.publicKey.toBase58()}`,);
 
-    const peers = [
-        {dstEid: 40231, peerAddress: addressToBytes32('0xEe124EFd323ec2e5148583b39a799ec7Cf6CD897')},
-        // {dstEid: 40202, peerAddress: addressToBytes32('0x531DD61c620bD76aC6fA4f7217bc4654EdB3C353')},
-    ];
 
     // ulnProgramID from LayerZero
     const uln = new PublicKey('7a4WjyR8VZ7yZz5XJAKm39BUGn5iT9CKcv2pmG9tdXVH');
@@ -30,7 +25,7 @@ async function main() {
     console.log(`🔑Token public key is: ${TokenPubKey}`,);
     console.log(`OFT Config is: ${oftConfig}`,);
 
-    for (const peer of peers) {
+    for (const peer of Peers) {
         console.log(`Processing configurations for dstEid: ${peer.dstEid}`);
     
         // Initialize the send library for the pathway.
