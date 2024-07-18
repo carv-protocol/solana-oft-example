@@ -1,0 +1,6 @@
+{
+    "name": "TOKEN_NAME",
+    "symbol": "SYM",
+    "description": "Description of token",
+    "uri": "https://arweave.net/json-file-arweave-url"
+}
